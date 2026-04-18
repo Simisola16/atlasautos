@@ -63,6 +63,26 @@ body {
   }
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -83,6 +103,14 @@ body {
 
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s linear infinite alternate;
 }
 
 .animate-slideUp {
@@ -127,6 +155,12 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.text-orange-gradient {
+  background: linear-gradient(to right, #f97316, #fb923c, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Button hover glow */
@@ -227,4 +261,28 @@ input[type="range"]::-moz-range-thumb {
   color: white;
   font-size: 12px;
   font-weight: bold;
+}
+
+/* Premium Labels */
+.label-premium {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+/* Luxury Swiper Pagination */
+.swiper-pagination-hero {
+  @apply !bottom-12 !left-1/2 -translate-x-1/2 z-40 hidden md:flex gap-2;
+}
+
+.swiper-pagination-bullet {
+  @apply !w-12 !h-1 !rounded-full !bg-white/20 !transition-all !duration-500 !opacity-100 !m-0;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-primary !w-20;
 }

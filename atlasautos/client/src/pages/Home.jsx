@@ -73,51 +73,101 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-dark">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-dark-50 to-dark py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Find Your <span className="gradient-text">Dream Car</span> Today
-            </h1>
-            <p className="text-lg md:text-xl text-gray-400 mb-8">
-              Nigeria's premier marketplace for buying and selling cars. 
-              Browse thousands of verified listings from trusted dealers.
-            </p>
-            
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search by brand, model, or keyword..."
-                  className="w-full bg-dark border border-dark-100 rounded-xl py-4 pl-14 pr-32 text-white placeholder-gray-500 focus:border-primary transition-colors text-lg"
+      {/* Cinematic Hero Slider */}
+      <section className="relative h-[85vh] min-h-[600px] w-full overflow-hidden">
+        <Swiper
+          modules={[Autoplay, EffectFade, Navigation, Pagination]}
+          effect="fade"
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          loop={true}
+          navigation={{
+            nextEl: '.swiper-button-next-hero',
+            prevEl: '.swiper-button-prev-hero',
+          }}
+          pagination={{ clickable: true }}
+          className="h-full w-full"
+        >
+          {heroSlides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative h-full w-full">
+                {/* Image Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/40 to-transparent z-10"></div>
+                <div className="absolute inset-0 bg-black/20 z-10"></div>
+                
+                <img 
+                  src={slide.image} 
+                  alt={slide.title}
+                  className="h-full w-full object-cover scale-105 animate-slow-zoom"
                 />
+
+                <div className="absolute inset-0 z-20 flex items-center">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div className="max-w-2xl">
+                      <div className="flex items-center gap-2 mb-6">
+                        <span className="h-1 w-12 bg-primary rounded-full"></span>
+                        <span className="text-primary font-black uppercase tracking-[.3em] text-[10px] md:text-xs">
+                          {slide.tag}
+                        </span>
+                      </div>
+                      <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight tracking-tighter mb-6">
+                        {slide.title} <br />
+                        <span className="text-orange-gradient font-black">{slide.highlight}</span>
+                      </h1>
+                      <p className="text-lg md:text-xl text-slate-300 font-medium max-w-lg mb-10 leading-relaxed">
+                        {slide.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* Global Search Interface (Floating) */}
+        <div className="absolute bottom-12 left-0 right-0 z-30 px-4 md:px-0">
+          <div className="max-w-5xl mx-auto">
+            <div className="glass p-2 md:p-3 rounded-2xl md:rounded-[2rem] border-white/10 shadow-2xl">
+              <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center gap-2">
+                <div className="relative flex-grow w-full">
+                  <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search by brand, performance, or keyword..."
+                    className="w-full bg-slate-900/50 border-none rounded-xl md:rounded-2xl py-4 md:py-6 pl-14 pr-4 text-white placeholder-slate-500 focus:ring-2 focus:ring-primary/50 transition-all font-bold"
+                  />
+                </div>
+                <div className="hidden lg:flex items-center gap-4 px-6 border-x border-white/5">
+                  <MapPin className="text-primary w-5 h-5 shrink-0" />
+                  <select className="bg-transparent text-white font-bold border-none focus:ring-0 cursor-pointer text-sm">
+                    <option className="bg-dark">All Nigeria</option>
+                    <option className="bg-dark">Lagos</option>
+                    <option className="bg-dark">Abuja</option>
+                  </select>
+                </div>
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-600 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
+                  className="w-full md:w-auto bg-primary hover:bg-primary-600 text-white px-10 py-4 md:py-6 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-sm transition-all transform hover:scale-105 active:scale-95 shadow-xl shadow-primary/20"
                 >
                   Search
                 </button>
-              </div>
-            </form>
-
-            {/* Quick Brand Links */}
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {['Toyota', 'Mercedes', 'BMW', 'Honda', 'Lexus'].map(brand => (
-                <Link
-                  key={brand}
-                  to={`/browse?brand=${brand}`}
-                  className="px-4 py-2 bg-dark-100 hover:bg-dark-200 text-gray-300 rounded-full text-sm transition-colors"
-                >
-                  {brand}
-                </Link>
-              ))}
+              </form>
             </div>
           </div>
+        </div>
+
+        {/* Navigation Controls */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-30 hidden lg:block">
+           <button className="swiper-button-prev-hero w-12 h-12 bg-white/5 hover:bg-primary/20 text-white rounded-xl flex items-center justify-center transition-all border border-white/5">
+              <ChevronRight size={24} className="rotate-180" />
+           </button>
+        </div>
+        <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-30 hidden lg:block">
+           <button className="swiper-button-next-hero w-12 h-12 bg-white/5 hover:bg-primary/20 text-white rounded-xl flex items-center justify-center transition-all border border-white/5">
+              <ChevronRight size={24} />
+           </button>
         </div>
       </section>
 
