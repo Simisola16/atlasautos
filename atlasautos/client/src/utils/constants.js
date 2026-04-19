@@ -87,8 +87,8 @@ export const CAR_FEATURES = [
   'Electric Boot'
 ];
 
-// Years (2020-2025)
-export const CAR_YEARS = Array.from({ length: 6 }, (_, i) => 2020 + i).reverse();
+// Years (1950-Present)
+export const CAR_YEARS = Array.from({ length: new Date().getFullYear() + 1 - 1950 + 1 }, (_, i) => 1950 + i).reverse();
 
 // Nigerian states
 export const NIGERIAN_STATES = [

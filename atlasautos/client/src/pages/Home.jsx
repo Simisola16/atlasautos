@@ -1,10 +1,56 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Car, MessageCircle, Shield, ChevronRight, TrendingUp, Star } from 'lucide-react';
+import { Search, Car, MessageCircle, Shield, ChevronRight, TrendingUp, Star, MapPin } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import { useAuth } from '../context/AuthContext';
 import CarCard from '../components/ui/CarCard';
 import SkeletonCard from '../components/ui/SkeletonCard';
 import { CAR_BRANDS } from '../utils/constants';
+
+// Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+const heroSlides = [
+  {
+    image: '/assets/luxury_gwagon.png',
+    tag: 'Premium Collection',
+    title: 'Experience the',
+    highlight: 'Urban Legend',
+    desc: 'The Mercedes-Benz G-Wagon. Uncompromising performance meets unparalleled luxury.'
+  },
+  {
+    image: '/assets/luxury_bmw_m5.png',
+    tag: 'M Performance',
+    title: 'Precision Meets',
+    highlight: 'Pure Power',
+    desc: 'The BMW M5 Competition. Master every corner with legendary engineering and M xDrive.'
+  },
+  {
+    image: '/assets/luxury_ferrari.png',
+    tag: 'Sports & Performance',
+    title: 'Dominate the',
+    highlight: 'Open Road',
+    desc: 'Engineered for speed, designed for soul. Discover our collection of high-performance supercars.'
+  },
+  {
+    image: '/assets/luxury_amg_gtr.png',
+    tag: 'AMG Driving Performance',
+    title: 'Forged in the',
+    highlight: 'Green Hell',
+    desc: 'The Mercedes-AMG GT R. Pure track-bred technology for the ultimate road experience.'
+  },
+  {
+    image: '/assets/luxury_rolls_royce.png',
+    tag: 'Elite Status',
+    title: 'The Pinnacle of',
+    highlight: 'Automotive Art',
+    desc: 'Rolls-Royce Phantom. More than a car, it is a statement of success and timeless elegance.'
+  }
+];
 
 const Home = () => {
   const { api } = useAuth();
