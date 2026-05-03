@@ -40,6 +40,7 @@ const SellerLayout = () => {
         {/* Logo */}
         <div className="p-6 border-b border-dark-100">
           <Link to="/seller/dashboard" className="flex items-center space-x-2">
+            <img src="/atlas-logo.png" alt="AtlasAutos Logo" className="h-8 w-auto object-contain" />
             <span className="text-xl font-bold">
               <span className="text-primary">ATLAS</span>
               <span className="text-white">AUTOS</span>
@@ -102,6 +103,7 @@ const SellerLayout = () => {
       <header className="lg:hidden fixed top-0 left-0 right-0 bg-dark-50 border-b border-dark-100 z-50">
         <div className="flex items-center justify-between px-4 py-3">
           <Link to="/seller/dashboard" className="flex items-center space-x-2">
+            <img src="/atlas-logo.png" alt="AtlasAutos Logo" className="h-7 w-auto object-contain" />
             <span className="text-lg font-bold">
               <span className="text-primary">ATLAS</span>
               <span className="text-white">AUTOS</span>
@@ -131,6 +133,7 @@ const SellerLayout = () => {
         {/* Logo */}
         <div className="p-4 border-b border-dark-100 flex items-center justify-between">
           <Link to="/seller/dashboard" className="flex items-center space-x-2">
+            <img src="/atlas-logo.png" alt="AtlasAutos Logo" className="h-8 w-auto object-contain" />
             <span className="text-xl font-bold">
               <span className="text-primary">ATLAS</span>
               <span className="text-white">AUTOS</span>

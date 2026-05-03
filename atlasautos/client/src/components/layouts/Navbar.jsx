@@ -31,7 +31,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold">
+            <img src="/atlas-logo.png" alt="AtlasAutos Logo" className="h-10 w-auto object-contain" />
+            <span className="text-2xl font-bold hidden sm:block">
               <span className="text-primary">ATLAS</span>
               <span className="text-white">AUTOS</span>
             </span>
