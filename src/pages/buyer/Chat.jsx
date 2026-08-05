@@ -93,13 +93,28 @@ const Chat = () => {
   const createNewChat = async (carId) => {
     try {
       setLoading(true);
+      
+      // Fetch car details first to check ownership
+      const carRes = await api.get(`/cars/${carId}`);
+      const car = carRes.data?.car;
+      
+      const currentUserId = user?.id || user?._id;
+      const sellerId = car?.seller?._id || car?.seller?.id || car?.seller;
+      
+      if (currentUserId && sellerId && currentUserId.toString() === sellerId.toString()) {
+        toast.error('Cannot chat about your own listing');
+        navigate('/conversations', { replace: true });
+        return;
+      }
+
       const response = await api.post('/chat', { carId });
       const newChatId = response.data.chat._id;
       navigate(`/chat/${newChatId}`, { replace: true });
     } catch (error) {
       console.error('Failed to create chat:', error);
-      toast.error('Failed to start conversation');
-      navigate('/conversations');
+      const msg = error.response?.data?.message || 'Failed to start conversation';
+      toast.error(msg);
+      navigate('/conversations', { replace: true });
     }
   };
 
