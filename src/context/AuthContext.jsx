@@ -94,18 +94,20 @@ export const AuthProvider = ({ children }) => {
         }
       });
 
-      const { token, user: newUser } = response.data;
+      const { token, user: newUser, requiresVerification } = response.data;
 
-      // Save to localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(newUser));
+      if (!requiresVerification) {
+        // Save to localStorage if no verification required (buyers)
+        if (token) localStorage.setItem('token', token);
+        if (newUser) localStorage.setItem('user', JSON.stringify(newUser));
 
-      setUser(newUser);
-      setIsAuthenticated(true);
+        setUser(newUser);
+        setIsAuthenticated(true);
+      }
       
-      toast.success('Account created successfully! Check your email.');
+      toast.success(response.data.message || 'Account created successfully!');
       
-      return { success: true, user: newUser };
+      return { success: true, user: newUser, requiresVerification };
     } catch (error) {
       const message = error.response?.data?.message || 'Registration failed';
       toast.error(message);
@@ -241,6 +243,31 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Verify 6-digit email code
+  const verifyCode = async (email, code) => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`${API_URL}/auth/verify-code`, { email, code });
+      const { token, user: verifiedUser } = response.data;
+
+      if (token && verifiedUser) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(verifiedUser));
+        setUser(verifiedUser);
+        setIsAuthenticated(true);
+      }
+      
+      toast.success(response.data.message || 'Email verified successfully!');
+      return { success: true, user: verifiedUser };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Verification failed';
+      toast.error(message);
+      return { success: false, error: message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const value = {
     user,
     loading,
@@ -251,6 +278,7 @@ export const AuthProvider = ({ children }) => {
     updateProfile,
     forgotPassword,
     resetPassword,
+    verifyCode,
     refreshUser,
     api
   };
