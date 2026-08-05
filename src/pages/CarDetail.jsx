@@ -33,6 +33,8 @@ import {
   formatFuelConsumption,
   formatFuelTank,
   formatDate,
+  formatPhone,
+  formatCarLocation,
   getInitials
 } from '../utils/formatters';
 import toast from 'react-hot-toast';
@@ -294,7 +296,7 @@ const CarDetail = () => {
                   </h1>
                   <div className="flex items-center gap-2 mt-2 text-gray-400">
                     <MapPin className="w-4 h-4" />
-                    <span>{car.seller?.city}, {car.seller?.state}</span>
+                    <span>{formatCarLocation(car)}</span>
                   </div>
                 </div>
                 <div className="text-right">

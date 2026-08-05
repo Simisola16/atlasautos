@@ -123,3 +123,25 @@ export const formatPhone = (phone) => {
   }
   return phone;
 };
+
+// Format location (city, state)
+export const formatLocation = (city, state, fallback = 'Nigeria') => {
+  const parts = [city, state]
+    .filter(Boolean)
+    .map(s => String(s).trim())
+    .filter(s => s.length > 0 && s !== 'undefined' && s !== 'null');
+  
+  if (parts.length === 0) return fallback;
+  if (parts.length === 1) return parts[0];
+  if (parts[0].toLowerCase() === parts[1].toLowerCase()) return parts[0];
+  
+  return parts.join(', ');
+};
+
+// Format car location from car object
+export const formatCarLocation = (car, fallback = 'Nigeria') => {
+  if (!car) return fallback;
+  const city = car.seller?.city || car.registeredCity || car.city;
+  const state = car.seller?.state || car.registeredState || car.state;
+  return formatLocation(city, state, fallback);
+};

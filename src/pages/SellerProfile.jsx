@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import CarCard from '../components/ui/CarCard';
 import EmptyState from '../components/ui/EmptyState';
+import { formatLocation } from '../utils/formatters';
 
 const SellerProfile = () => {
   const { sellerId } = useParams();
@@ -98,7 +99,7 @@ const SellerProfile = () => {
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-1 text-gray-400">
                   <MapPin className="w-4 h-4" />
-                  <span>{seller.city}, {seller.state}</span>
+                  <span>{formatLocation(seller?.city, seller?.state)}</span>
                 </div>
                 <div className="flex items-center gap-1 text-gray-400">
                   <Calendar className="w-4 h-4" />

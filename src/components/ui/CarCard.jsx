@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, MapPin, Gauge, MessageCircle, CheckCircle } from 'lucide-react';
-import { formatPrice, formatMileage, truncateText } from '../../utils/formatters';
+import { formatPrice, formatMileage, truncateText, formatCarLocation } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 
@@ -145,7 +145,7 @@ const CarCard = ({ car, showFavorite = true }) => {
         <div className="mt-3 pt-3 border-t border-dark-100">
           <div className="flex items-center gap-1 text-gray-400 text-sm">
             <MapPin className="w-4 h-4" />
-            <span className="truncate">{car.seller?.city}, {car.seller?.state}</span>
+            <span className="truncate">{formatCarLocation(car)}</span>
           </div>
           
           {car.seller && (
