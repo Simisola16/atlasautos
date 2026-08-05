@@ -89,6 +89,10 @@ const Conversations = () => {
                       src={otherUser.profilePhoto}
                       alt={otherUser.dealershipName || otherUser.fullName}
                       className="w-14 h-14 rounded-full object-cover flex-shrink-0"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                      }}
                     />
                   ) : (
                     <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center flex-shrink-0">

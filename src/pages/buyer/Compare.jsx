@@ -163,9 +163,13 @@ const Compare = () => {
                         </button>
                         <Link to={`/car/${car._id}`} className="block">
                           <img
-                            src={car.coverPhoto}
+                            src={car.coverPhoto || '/assets/luxury_gwagon.png'}
                             alt={`${car.brand} ${car.model}`}
                             className="w-full h-32 object-cover rounded-lg mb-3"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = '/assets/luxury_gwagon.png';
+                            }}
                           />
                           <p className="text-white font-medium text-left">
                             {car.year} {car.brand} {car.model}

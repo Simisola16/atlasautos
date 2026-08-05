@@ -69,6 +69,10 @@ const SellerProfile = () => {
                 src={seller.profilePhoto}
                 alt={seller.dealershipName || seller.fullName}
                 className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = 'none';
+                }}
               />
             ) : (
               <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary flex items-center justify-center">

@@ -221,6 +221,10 @@ const Chat = () => {
                 src={otherUser.profilePhoto}
                 alt={otherUser.dealershipName || otherUser.fullName}
                 className="w-10 h-10 rounded-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = 'none';
+                }}
               />
             ) : (
               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
@@ -254,9 +258,13 @@ const Chat = () => {
               className="flex items-center gap-3 w-full text-left"
             >
               <img
-                src={chat.car?.coverPhoto}
+                src={chat.car?.coverPhoto || '/assets/luxury_gwagon.png'}
                 alt={`${chat.car?.brand} ${chat.car?.model}`}
                 className="w-12 h-9 rounded object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/assets/luxury_gwagon.png';
+                }}
               />
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-white truncate">
@@ -300,6 +308,10 @@ const Chat = () => {
                         src={message.sender.profilePhoto}
                         alt={message.sender.fullName}
                         className="w-8 h-8 rounded-full object-cover"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.style.display = 'none';
+                        }}
                       />
                     ) : (
                       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">

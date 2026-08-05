@@ -42,6 +42,13 @@ const CarCard = ({ car, showFavorite = true }) => {
       return;
     }
 
+    const currentUserId = user?.id || user?._id;
+    const sellerId = car.seller?._id || car.seller?.id || car.seller;
+    if (currentUserId && sellerId && currentUserId.toString() === sellerId.toString()) {
+      toast.error('Cannot chat about your own listing');
+      return;
+    }
+
     // Navigate to chat
     window.location.href = `/chat/new?carId=${car._id}`;
   };

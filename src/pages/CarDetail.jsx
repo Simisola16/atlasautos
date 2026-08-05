@@ -127,11 +127,17 @@ const CarDetail = () => {
       return;
     }
 
+    if (isOwner) {
+      toast.error('Cannot chat about your own listing');
+      return;
+    }
+
     try {
       const response = await api.post('/chat', { carId: id });
       navigate(`/chat/${response.data.chat._id}`);
     } catch (error) {
-      toast.error('Failed to start chat');
+      const message = error.response?.data?.message || 'Failed to start chat';
+      toast.error(message);
     }
   };
 
@@ -179,7 +185,9 @@ const CarDetail = () => {
     );
   }
 
-  const isOwner = user?._id === car.seller?._id;
+  const currentUserId = user?.id || user?._id;
+  const sellerId = car.seller?._id || car.seller?.id || car.seller;
+  const isOwner = Boolean(currentUserId && sellerId && currentUserId.toString() === sellerId.toString());
 
   return (
     <div className="min-h-screen bg-dark pb-20">
