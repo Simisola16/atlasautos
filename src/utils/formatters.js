@@ -145,3 +145,10 @@ export const formatCarLocation = (car, fallback = 'Nigeria') => {
   const state = car.seller?.state || car.registeredState || car.state;
   return formatLocation(city, state, fallback);
 };
+
+// Sanitize image URL to prevent broken Supabase domain errors
+export const sanitizeImageUrl = (url, fallback = '/assets/luxury_gwagon.png') => {
+  if (!url || typeof url !== 'string') return fallback;
+  if (url.includes('supabase.co')) return fallback;
+  return url;
+};
