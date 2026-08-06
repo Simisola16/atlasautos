@@ -156,6 +156,10 @@ const CarCard = ({ car, showFavorite = true }) => {
                     src={car.seller.profilePhoto}
                     alt={car.seller.dealershipName || car.seller.fullName}
                     className="w-6 h-6 rounded-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.style.display = 'none';
+                    }}
                   />
                 ) : (
                   <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
