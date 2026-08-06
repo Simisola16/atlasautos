@@ -18,6 +18,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import VerifyEmail from './pages/auth/VerifyEmail';
 
 // Buyer Pages
 import Favorites from './pages/buyer/Favorites';
@@ -108,6 +109,7 @@ function App() {
       <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
       <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
       <Route path="/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
 
       {/* Buyer Routes */}
       <Route path="/" element={<ProtectedRoute allowedRoles={['buyer']}><MainLayout /></ProtectedRoute>}> 
