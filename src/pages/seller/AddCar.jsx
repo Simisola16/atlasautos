@@ -805,7 +805,10 @@ const AddCar = () => {
             className="flex items-center space-x-2 px-6 py-3 bg-primary hover:bg-primary-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
           >
             {loading ? (
-              <LoadingSpinner size="sm" />
+              <>
+                <LoadingSpinner size="sm" />
+                <span>Publishing...</span>
+              </>
             ) : (
               <>
                 <span>Publish Listing</span>
