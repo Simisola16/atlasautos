@@ -53,12 +53,7 @@ const Register = () => {
     setLoading(false);
     
     if (result.success) {
-      if (role === 'seller') {
-        // Sellers need to verify email first
-        navigate('/verify-email', { state: { email: formData.email } });
-      } else {
-        navigate('/browse');
-      }
+      navigate('/verify-email', { state: { email: formData.email } });
     }
   };
 
